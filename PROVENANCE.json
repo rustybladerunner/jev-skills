@@ -1,0 +1,21 @@
+{
+  "source_commit": "70ff3182a5bf55391a8d92d09012a76b082f6029",
+  "source_directory": "skills",
+  "source_history_copied": false,
+  "changes": [
+    "README license link adapted to standalone root; MIT LICENSE copied",
+    "Preserve file bytes across platforms with .gitattributes"
+  ],
+  "files": {
+    ".gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "LICENSE": "50abfe712dbf00dd40a69e20841cd3abc3e42c3d8eac277f9ee11ff3b7677af4",
+    "README.md": "04ccc329ac625da29d3f4b00039206b81600abf7b898c7addc7926b8eca58f71",
+    "examples/check_fixture.py": "f71b5366b9927080b1564578ce1143d7174e49e0b453b7ef3bef4127faa2a83b",
+    "examples/demo.py": "2a46aa8b8de29b6bc30cad6292fab7bbc86d1517e6502209d7b21eeeba9e0cf3",
+    "examples/test_demo.py": "f89a9d2d1ee29cdfb4d5e46911ce5ff0c444a5ea3af4efbc3773a4bcc4797814",
+    "jev-hypothesize/SKILL.md": "9885a04201e50d65ba9be12e650782579fdde272cf35773657efb136092906fb",
+    "jev-integrate/SKILL.md": "b842e9eddde356bfcbef30450a4c053d20f3d56810ceba4c469c0c75cd177573",
+    "jev-hypothesize/references/context.md": "100a9c0bd90e7192f9cfddc601187d0cf7675188e73a16c3b81957a30e84df76",
+    "jev-integrate/references/context.md": "100a9c0bd90e7192f9cfddc601187d0cf7675188e73a16c3b81957a30e84df76"
+  }
+}
