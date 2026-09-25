@@ -152,3 +152,7 @@ reproduction, the expected outcome, and any new limitation they introduce.
 
 MIT licensed; see [LICENSE](LICENSE). Jev is a third-party service. This project
 does not claim affiliation or endorsement. Mount Jeverest remains a future idea.
+
+Every public update requires a secrets and personal-data review of content and
+history. See [the publication checklist](PUBLICATION.md); automated scanning is
+an additional check, not proof that disclosure is impossible.
