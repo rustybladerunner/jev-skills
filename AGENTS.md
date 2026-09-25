@@ -1,6 +1,8 @@
 # Public Jev work
 
-Read README.md and PUBLICATION.md. Before every public push or release, review
+Read README.md, STYLE.md, and PUBLICATION.md. Use the writing guide for all
+new public-facing prose; keep commands, measured results, and restrictions exact.
+Before every public push or release, review
 the exact content and newly reachable Git history for secrets and personal data.
 Run available secret/privacy scans and review their findings; a clean scan alone
 does not approve publication. Include commit metadata, examples, logs, evidence,

@@ -1,32 +1,65 @@
-# Research review and next experiments
+# Research worth testing next
 
-Reviewed September 25, 2026. This records prospective work; no new inference was run for the review. Existing studies, allowances and evaluation assets retain their identities.
+Reviewed September 25, 2026. This is a plan for further experiments. We made no
+new model calls for this review and haven't changed the existing studies,
+budgets, or evaluation data.
 
-| Primary source | What changes our plan | Limit / disposition |
+| Source | What we'd take from it | What it doesn't establish |
 |---|---|---|
-| [JevOut, September 24](https://arxiv.org/html/2609.30243v1) | Add plausible irrelevant context alongside option-order perturbations | Optimizer redirected 312/508 initially correct Jev decisions within 64 accepted evaluations per item; this is adversarial search, not deployment error. Automated answer-preservation checking merits independent review. Adopt the test question, not a universal failure-rate claim |
-| [Conformal LLM Routing, ACL SRW July](https://aclanthology.org/2026.acl-srw.70.pdf) | Choose operating points against defined incremental error, with calibration/evaluation separation | Assumes exchangeability and suitable labels; guarantee is not per-request truth or subgroup safety. Both models wrong can count as no routing loss. Evaluate alongside absolute task failure |
-| [Laya benchmarks](https://github.com/NandhaKishorM/laya/blob/main/BENCHMARKS.md) | Evaluate the exact task-tuned checkpoint, tokenizer and calibration configuration | Upstream reports typed accuracy 0.766 and ECE 0.213; base checkpoints fall below majority on that suite. Published Jev comparisons are not our paired run. Continue evaluation |
-| [Verdict repository](https://github.com/Heman10x-NGU/openJev-verdict-2.0) | Separate the general Verdict checkpoint from specialized Verdict 2.0; pin engine and calibrator as well as weights | Correctness-head calibration and option-distribution calibration are different metrics. Do not relabel our existing caller observations as the newer model's results |
-| [LLMRouterBench, January](https://arxiv.org/abs/2601.07206) | Include simple baselines and a fixed-model comparator | Broad benchmark reports several advanced/commercial routers failing to reliably beat a simple baseline. It does not decide our workload's winner |
-| [JevRL, September technical report](https://jevrl.github.io/) | Retain direct Brier-training and majority baselines in future training research | One-seed synthetic pilot, no trained selective-abstention dataset; watch only |
+| [JevOut, September 24](https://arxiv.org/html/2609.30243v1) | Test plausible but irrelevant context as well as changed option order | The optimizer redirected 312/508 initially correct decisions within 64 accepted evaluations per item. That's an attack search, not an ordinary-traffic error rate. Its automated check that the correct answer stayed the same needs independent review |
+| [Conformal LLM Routing, ACL SRW July](https://aclanthology.org/2026.acl-srw.70.pdf) | Choose thresholds around a defined error cost. Keep calibration separate from evaluation | It assumes suitable labels and exchangeable data: roughly, calibration and evaluation examples must come from the same distribution. It doesn't guarantee each answer or every subgroup is safe. If both models are wrong, routing loss can still be zero |
+| [Laya benchmarks](https://github.com/NandhaKishorM/laya/blob/main/BENCHMARKS.md) | Test the exact model version, tokenizer, and calibration setup | The authors report typed accuracy 0.766 and expected calibration error (ECE) 0.213. Base models score below the majority baseline on that suite. Their Jev comparison isn't our own paired test |
+| [Verdict repository](https://github.com/Heman10x-NGU/openJev-verdict-2.0) | Keep general Verdict and specialized Verdict 2.0 results separate. Record engine, calibrator, and weights | Calibration of a correctness score differs from calibration of the option scores. Our existing caller results don't become results for a newer model |
+| [LLMRouterBench, January](https://arxiv.org/abs/2601.07206) | Include simple baselines and a comparison that always uses the same model | Several advanced or commercial routers didn't reliably beat a simple baseline in that benchmark. It doesn't tell us which option wins on our workload |
+| [JevRL, September technical report](https://jevrl.github.io/) | Keep direct Brier-score training and majority baselines in any future training comparison | This is a synthetic pilot with one seed and no trained selective-abstention dataset. Worth watching; not a reason to adopt it yet |
 
-## Next play: robustness and value before broader authority
+## Does changing the context change the decision?
 
-### Question A — does context instability expose actionable risk?
+Create fresh public or synthetic cases. Keep related case families in separate
+development, calibration, and test groups. Review neutral and misleading additions
+independently of the model being tested, checking that the correct answer stays
+the same.
 
-Freeze fresh public/synthetic cases and family-disjoint splits. For each case, review neutral and misleading-but-answer-preserving additions independently from the target model. Compare current policy, single-order decisions, two-order averaging and an instability-abstention variant. Keep adversarial stress rates separate from naturalistic workload estimates. Known failures belong in regression fixtures, not a new held-out score.
+Compare the current policy, one option order, two-order averaging, and a version
+that refuses when the answers change too much. Keep attack-test results separate
+from estimates of normal use. Known failures belong in regression tests, not in
+a supposedly fresh test score.
 
-Select any instability cutoff using calibration only. Report unsafe skips, unnecessary paid escalation, missed useful work, accepted coverage, per-family uncertainty, all-call latency/cost, and raw versus enforced choices. Passing requires correct enforcement regressions and a measured useful operating point; zero observed errors alone does not certify safety.
+Choose any disagreement threshold using calibration data only. Report prohibited
+skips, unnecessary paid calls, missed useful work, accepted decisions, uncertainty
+by case family, and the time and cost of every call. Show recommendations and
+permitted actions separately. We need passing enforcement checks and a useful
+measured trade-off. Zero observed errors alone won't establish safety.
 
-### Question B — does a calibrated gate improve the actual trade-off?
+## Can a refusal threshold improve the trade-off?
 
-Define losses by action before observing results. Missing a valuable research item differs from spending time reviewing noise; an unsupported skip differs from unnecessary escalation. Compare current thresholds, deterministic rules and a simple classifier where applicable. Check the chosen method's threshold-selection assumptions. Report both relative routing loss and absolute accepted-task failure, including both-models-wrong cases. Keep weak-label, subgroup and temporal-shift limitations visible.
+Define the cost of each wrong action before seeing results. Missing a useful
+research item has a different cost from reviewing an irrelevant one. Skipping a
+required check differs from paying for work we didn't need.
 
-### Question C — which local candidate earns its resource cost?
+Compare the existing thresholds, fixed rules, and a simple classifier where one
+fits. Check the assumptions behind threshold selection. Count both the extra
+errors caused by routing and failed tasks overall, including cases where both
+models are wrong. Keep uncertain labels, subgroup differences, and changes over
+time visible in the results.
 
-Continue the existing offline adapter seam. Bind checkpoint, source, tokenizer, calibration, device and precision; test truncation, identity drift and resource refusal before inference. Compare identical fresh inputs against the existing policy. Measure cold load separately from warm request and end-to-end time. Use current permissions and an explicit execution envelope; publication of a plan is not permission to install weights or run models.
+## Which local model is worth its resource cost?
 
-### Question D — is there practical value?
+Continue with the existing offline adapter. Record the exact model, source,
+tokenizer, calibration, device, and precision. Before inference, test cut-off
+inputs, changed model identity, and refusal when resources aren't available.
 
-Continue the existing accepted-task pilot with a paired simplest-working baseline. Count task authoring, model calls, cache reads/writes, review, retries, failed runs, repair and operator time. Preserve negative results and prospective acceptance criteria. A candidate advances only when quality is retained and its practical cost or time improvement is supported within the measured scope.
+Use identical fresh inputs for the candidate and current policy. Measure initial
+loading, warm requests, and complete-task time separately. Any live run needs
+the existing permissions and explicit resource and spending limits. This plan
+doesn't authorize installing weights or running models.
+
+## Does it help us finish useful work?
+
+Continue the accepted-task pilot with a paired comparison against the simplest
+method that works. Count task authoring, model calls, cached reads and writes,
+review, retries, failures, repair, and operator time.
+
+Set acceptance criteria before the run and keep negative results. Move a candidate
+forward only when it retains quality and shows a cost or time benefit within the
+scope we actually measured.

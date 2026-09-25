@@ -1,34 +1,34 @@
-# Public-content review
+# Check privacy before publishing
 
-Every public push, release, issue attachment and documentation export requires
-a secrets and personal-data check before upload. This applies to documentation
-as well as code. Prior publication does not make content safe to copy forward.
+Check for secrets and personal data before every public push, release, issue
+attachment, or documentation export. This applies to prose as well as code.
+Something being public already doesn't make it safe to copy into a new release.
 
-1. Review the exact files and diff, including generated outputs, images, archives,
-   links and file names. Use synthetic examples or reviewed, non-identifying
-   aggregates. Exclude private conversations, customer records, raw operational
-   logs, account details, private-project identifiers and personal corpus.
-2. Run secret scanning on the candidate content and all history that will become
-   public, including commit/tag messages and author metadata. Inspect environment
-   files, credentials, authentication headers, URLs containing credentials,
-   machine/home paths, device identifiers and contact details. Never print secret
-   matches into a public log or issue.
-3. Review findings in context. Keep any approved public attribution deliberate;
-   do not silently allowlist an entire file or suppress an unexplained finding.
-   Automated patterns cannot reliably detect all personal data or unknown secrets.
-4. Check the exact release archive and its inventory, not just the source folder.
-   Prefer a reviewed export without private Git history. Retain the experimental
-   notice, denominators, limitations and distinction between public reproduction
-   and maintainer-reported results.
-5. Record the reviewed commit/archive identity, scope, checks and any limitations
-   in the release record. Stop publication when a finding remains unresolved.
-   Check public read-back against the reviewed artifact after upload.
+1. **Review what will leave the private workspace.** Read the exact files and
+   diff, including generated files, images, archives, links, and file names. Use
+   synthetic examples or reviewed summaries that don't identify people. Exclude
+   private conversations, customer records, raw operational logs, account details,
+   private-project identifiers, and personal source material.
+2. **Scan content and history before upload.** Include every commit that will
+   become public, along with commit/tag messages and author details. Check for
+   environment files, credentials, authentication headers, credentials in URLs,
+   home-directory paths, device identifiers, and contact details. Never put matched
+   secrets in a public log or issue.
+3. **Review each finding.** Keep public attribution deliberate. Don't allowlist
+   a whole file or dismiss an unexplained match. Automated patterns miss some
+   personal information and unknown secret formats.
+4. **Check the actual release package.** Review the archive and file inventory,
+   not just the source folder. Prefer a reviewed export without private Git
+   history. Keep the experimental notice, counts, and limitations. Say which
+   results readers can reproduce and which ones we are reporting from private records.
+5. **Record and verify the result.** Save the reviewed commit or archive identity,
+   checks, scope, and limitations in the release record. Do not publish unresolved
+   findings. After upload, compare the public files with the reviewed version.
 
-GitHub secret scanning and push protection, where enabled, supplement this
-pre-publication review. They do not cover all personal information, cannot replace
-content review, and do not prove that a repository contains no secrets. A check
-that runs only after a public push is too late to prevent that disclosure.
+GitHub secret scanning and push protection add useful checks where enabled. They
+don't cover all personal information or prove that a repo contains no secrets.
+A scan that runs only after a public push cannot prevent that disclosure.
 
 If a real credential is exposed, revoke or rotate it immediately and notify its
-owner privately. Removing it from the latest file is insufficient: inspect history,
-releases and other copies, and coordinate remediation without reposting the value.
+owner privately. Deleting it from the latest file isn't enough. Check history,
+releases, and other copies, and coordinate cleanup without reposting the value.
