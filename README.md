@@ -1,5 +1,12 @@
 # Jev skills
 
+> **Experimental research and workflows — not validated for production use.**
+> Results come from limited synthetic studies and early operational trials, with
+> incomplete independent human validation. They do not establish general
+> reliability, safety, or cost savings. Validate each use case on representative
+> data, keep consequential actions subject to explicit authorization and checks,
+> and supervise trials. Interfaces and recommendations may change.
+
 A practical guide to using decision models, with reusable agent workflows and evidence from our own experiments.
 
 This is the front door for our Jev work. [Aldertrace](https://github.com/rustybladerunner/aldertrace) holds the reproducible routing study and enforcement instruments. These projects are independent of TypeSafe and the other model authors.
